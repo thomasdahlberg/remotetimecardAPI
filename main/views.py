@@ -4,12 +4,12 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
 
-from .models import Profile, Site, TimePunch, Session
+from .models import Profile, Site, TimePunch, Session, Organization
 
 # Site Views
 
 def site_index(request):
-    sites = Sites.objects.all().order_by('-id')
+    sites = Site.objects.all().order_by('-id')
     return JsonResponse(sites)
 
 def add_site(request):
@@ -19,7 +19,7 @@ def update_site(request):
     pass
 
 def get_site(request, site_id):
-    site = Sites.objects.get(id=site_id)
+    site = Site.objects.get(id=site_id)
     return JsonResponse(site)
 
 # Session Views
@@ -54,3 +54,10 @@ def get_profile(request, profile_id):
 
 def sign_up(request):
     pass
+
+# Organization Views
+
+def get_organization(request, organization_id):
+    organization = Organization.objects.get(id=organization_id)
+    JsonResponse(organization)
+

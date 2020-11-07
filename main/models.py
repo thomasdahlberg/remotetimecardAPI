@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Models
+class Organization(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -13,10 +18,12 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=200)
     phone = models.IntegerField(max_length=10)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
+
 
 class Site(models.Model):
     name = models.CharField(max_length=100, blank=True)
@@ -25,6 +32,7 @@ class Site(models.Model):
     lng = models.FloatField()
     radius = models.FloatField()
     active = models.BooleanField(default=True)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
