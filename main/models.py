@@ -37,18 +37,20 @@ class Site(models.Model):
     def __str__(self):
         return self.name
 
+class Session(models.Model):
+    employee = models.ForeignKey(User, on_delete=models.CASCADE)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+    date = models.DateField()
+    hours = models.FloatField()
+
 class TimePunch(models.Model):
     punch_time: models.DateTimeField("Punch Time")
+    clock_in: models.BooleanField()
     lat = models.FloatField()
     lng = models.FloatField()
     proximity = models.FloatField()
     verified = models.BooleanField(default=False)
-
-class Session(models.Model):
-    employee = models.ForeignKey(User, on_delete=models.CASCADE)
-    site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    punch_in: models.ForeignKey(TimePunch, on_delete=models.CASCADE)
-    punch_out: models.ForeignKey(TimePunch, on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
 
 
 

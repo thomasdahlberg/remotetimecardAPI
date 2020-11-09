@@ -31,6 +31,7 @@ def get_site(request, site_id):
 
 def session_index(request):
     sessions = Session.objects.all().order_by('-id')
+    return JsonResponse(sessions)
 
 def add_session(request):
     pass
