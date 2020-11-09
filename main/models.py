@@ -17,7 +17,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=200)
-    phone = models.IntegerField(max_length=10)
+    phone = models.IntegerField()
     active = models.BooleanField(default=False)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
 

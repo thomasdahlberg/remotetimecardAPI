@@ -1,10 +1,15 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
 
 from .models import Profile, Site, TimePunch, Session, Organization
+
+# Test View
+
+def home(request):
+    return HttpResponse("Welcome to Remote Timecard API!")
 
 # Site Views
 
